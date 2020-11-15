@@ -8,22 +8,22 @@ jest.mock("axios");
 describe("register", () => {
   test("should post user when validated", async () => {
     // TODO 19: add test here
-    axios.post.mockResolvedValueOnce({
+    axios.post.mockResolvedValue({
       data: {
         name: "yiming",
       },
     });
+    verifyPassword.mockReturnValue(true);
+    verifyUsername.mockReturnValue(true);
     const result = register("aaa", "bbb");
     await expect(result).resolves.toEqual({ name: "yiming" });
   });
 
   test("should reject with Error when username is invalid", async () => {
     // TODO 20: add test here
-    const fakeUserName = "aaa";
-    const fakePassWord = "bbb";
-    verifyUsername.mockReturnValueOnce(false);
-    verifyPassword.mockReturnValueOnce(true);
-    const result = register(fakeUserName, fakePassWord);
+    verifyPassword.mockReturnValue(true);
+    verifyUsername.mockReturnValue(false);
+    const result = register("aaa", "bbb");
     await expect(result).rejects.toEqual(Error("wrong username or password"));
   });
 });
