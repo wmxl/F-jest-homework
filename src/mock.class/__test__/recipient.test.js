@@ -1,4 +1,4 @@
-import Recipient from "../Recipient";
+import Recipient from "../recipient";
 
 describe("acceptInjection", () => {
   beforeEach(() => {
@@ -16,11 +16,10 @@ describe("acceptInjection", () => {
     });
 
     const Covid19Vaccine = require("../covid19Vaccine");
-
     const recipient = new Recipient();
 
     recipient.acceptInjection(new Covid19Vaccine());
-    expect(recipient.hasAntibodies).toBe(false);
+    expect(recipient.hasAntibodies).toBeFalsy();
   });
 
   test("should hasAntibodies be true if vaccine contain Virus Proteins", () => {
@@ -33,10 +32,9 @@ describe("acceptInjection", () => {
       });
     });
     const Covid19Vaccine = require("../covid19Vaccine");
-
     const recipient = new Recipient();
 
     recipient.acceptInjection(new Covid19Vaccine());
-    expect(recipient.hasAntibodies).toBe(true);
+    expect(recipient.hasAntibodies).toBeTruthy();
   });
 });
